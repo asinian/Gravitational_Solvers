@@ -15,6 +15,9 @@ $$ \vec{x}_j(t) = \vec{x}_j(t - dt) + dt \: \vec{v}_j(t - dt) $$
 
 We note that whereas $ \vec{v}_j(t) $ and $ \vec{x}_j(t) $ are calculated using the acceleration of the previous time step, the acceleration itself is calculated using the current position. This poses a challenge for the program, because we must update all positions and velocities at time t before we can update the acceleration. This is the reason there are two independent loops in the main solver routine. Of course, in making the approximation that everything happens instantaneously, we ignore retarded time.
 
+### Validation: the Exact Solution for Two Bodies
+The two body problem has an exact solution which we can use to verify the validity of the solver. In particular, 
+
 ## The Two-Dimensional Many-Body Problem
 In this scenaro, $ N $ objects are initialized with position $ (x_0, y_0) $ and velocity $ (v_{x0}, v_{y0}) $ and are set into motion with only their mass coupling them by the gravitational force, which for the jth object is given by: 
 $$ F_{ij} = \sum_{i \neq j} G \frac{m_i m_j}{r_{ij}^2} $$
@@ -49,3 +52,7 @@ $$ f(t - dt) = f(t) - f'(t) dt + \frac{1}{2} f''(t) dt^2 + O(dt^3) \tag{4.4} $$
 10. introduce phase space plots of x-v, (x-a and v-a?)
 11. plot relative distances
 12. introduce densities and sizes so that boundary conditions can be enforced
+13. tighten up the plotting routine so that you can plot more with fewer functions 
+14. solve the 2bp exactly so that you can compare it to the generated plot
+15. change from a list-based approach to a array-based approach to more effectively handle large datasets
+16. figure out the annoying c.t_num + 1 

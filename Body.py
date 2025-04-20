@@ -66,12 +66,10 @@ class Body_1D(Body):
 
     def euler_1D(self, bodies, t):
         """
-        Calculates the next step of self due to other bodies at time t using Euler Forward
-        Body: the mass experiencing the acceleration
+        Calculates the new position and velocity of self due to other bodies at time index t using Euler Forward
         bodies: the other masses contributing to Body's acceleration
         t: the current time index
         """
-
         # calculate new position
         x_new = self.x[t-1] + c.dt * self.v[t-1]
         # update position
@@ -81,9 +79,6 @@ class Body_1D(Body):
         v_new = self.v[t-1] + c.dt * self.a[t-1]
         # update velocity
         self.v[t,:] = v_new
-
-        # calculate new acceleration
-        self.acceleration_1D(bodies, t)
 
 ### TWO DIMENSIONS ###
 class Body_2D(Body):

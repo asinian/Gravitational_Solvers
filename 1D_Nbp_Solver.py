@@ -42,19 +42,12 @@ def one_dimensional_Nbp():
         elif c.dim == 3:
             bodies += [Body_3D(body[c.mass], body[c.pos], body[c.vel])]
 
-        # isolate the body we want to update
-        b = bodies[i]
-        # remove it from the list
-        bodies.remove(b)
-        # get initial acceleration
-        b.acceleration_1D(bodies, 0)
-        # put it back
-        bodies.insert(i, b)
-
     # create system object
     S = System(bodies)
+    # initialize acceleration
+    S.initialize_acceleration()
 
-    # main loop
+    # main loop #
     print("Beginning simulation...")
     # two ways of tracking time
     t = 0                   
@@ -68,13 +61,21 @@ def one_dimensional_Nbp():
         # calculate the next step
         S.next_step_1D(t_index)
 
-    # plot results
+    ### plot results ###
     print("Generating output...")
     # plot_xva_single(bodies)
     # plot_xva_all(bodies)
     plot_individual(bodies)
 
-    # stop clock
+    # # conservation checks
+    # if c.track_energy_conservation:
+    #     energy_list = S.energy_conservation()
+    #     plot_energy(energy_list)
+    if c.track_momentum_conservation:
+        momentum_list = S.momentum_conservation()
+        plot_momentum(momentum_list)
+
+    ### stop clock ###
     stop = time.time()
     time_elapsed = round(stop - start, 2)
     print(f"Process completed in {time_elapsed} seconds.")

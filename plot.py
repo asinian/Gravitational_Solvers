@@ -82,7 +82,6 @@ def plot_individual(bodies):
             # plot x(t)
             plt.title = f"x(t), m={body.m}"
             plt.grid()
-            # plt.style.use("dark_background")
             plt.xlabel = "time (s)"
             plt.ylabel("x(t) (m)")
             plt.plot(t_list, x_list, color="springgreen")
@@ -92,7 +91,6 @@ def plot_individual(bodies):
             # plot v(t)
             plt.title = f"x(t), m={body.m}"
             plt.grid()
-            # plt.style.use("dark_background")
             plt.xlabel = "time (s)"
             plt.ylabel("v(t) (m)")
             plt.plot(t_list, v_list, color="gold")
@@ -102,7 +100,6 @@ def plot_individual(bodies):
             # plot a(t)
             plt.title = f"x(t), m={body.m}"
             plt.grid()
-            # plt.style.use("dark_background")
             plt.xlabel = "time (s)"
             plt.ylabel("a(t) (m)")
             plt.plot(t_list, a_list, color="salmon")
@@ -114,3 +111,46 @@ def plot_individual(bodies):
     elif c.dim == 3:
         pass
 
+def plot_energy(energy_list):
+    """
+    Plot the energy over time to track energy conservation
+    """
+
+    # create directory if one does not exist
+    directory_name = f"Energy_Conservation--N={c.N}, Tmax={c.Tmax}"
+    if os.path.exists(directory_name) == False:
+        os.mkdir(directory_name)
+
+    # get time list
+    t_list = np.linspace(0, c.Tmax, c.t_num+1)
+
+    # plot energies
+    plt.title = f"Total System Energy Over Time, N={c.N}, Tmax={c.Tmax}"
+    plt.grid()
+    plt.xlabel = "time (s)"
+    plt.ylabel("energy (J)")
+    plt.plot(t_list, energy_list, color="magenta")
+    plt.savefig(f"{directory_name}/energy_plot.png")
+    plt.close()
+
+def plot_momentum(momentum_list):
+    """
+    Plot the momentum over time to track momentum conservation
+    """
+
+    # create directory if one does not exist
+    directory_name = f"Momentum_Conservation--N={c.N}, Tmax={c.Tmax}"
+    if os.path.exists(directory_name) == False:
+        os.mkdir(directory_name)
+
+    # get time list
+    t_list = np.linspace(0, c.Tmax, c.t_num+1)
+
+    # plot energies
+    plt.title = f"Total System Momentum Over Time, N={c.N}, Tmax={c.Tmax}"
+    plt.grid()
+    plt.xlabel = "time (s)"
+    plt.ylabel("momentum (kg m/s)")
+    plt.plot(t_list, momentum_list, color="magenta")
+    plt.savefig(f"{directory_name}/momentum_plot.png")
+    plt.close()
